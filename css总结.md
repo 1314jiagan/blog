@@ -61,7 +61,7 @@ http://js.jirengu.com/dararibola/1/edit
 
 负margin使用方法见这里。
 
-## flex 布局(常用，不兼容最新浏览器，之前的也许兼容)
+## flex 布局(常用，不兼容最新浏览器，之前的需兼容)
   
   变成flex容器
   ```
