@@ -145,6 +145,11 @@ obj[name]  // 记住这里的 name 是变量
 改原型 let obj = Object.create(common)
 注：所有 __proto__ 代码都是强烈不推荐写的
 ```
+## 'name' in obj和obj.hasOwnProperty('name') 的区别
+
+'name' in obj 只能查看obj里是否有这个属性，不能查看是不是共有属性还是自身有的
+
+obj.hasOwnProperty('name') 查看的是自身有的属性，不是共有属性。
 
 
 
