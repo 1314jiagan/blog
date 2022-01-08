@@ -17,4 +17,12 @@ for(var i = 0; i<6; i++){
 }
 ```
 但是将以上的var 改成 let ，就会输出0，1，2，3，4，5。
+```
+for (var i=0; i<6; i++) {
+
+!(function (i){setTimeout(() => console.log(i),0)})(i)
+
+}
+```
+利用立即执行函数将i打印出也是0，1，2，3，4，5。
 
