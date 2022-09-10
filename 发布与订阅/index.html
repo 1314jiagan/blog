@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const eventHub = {
+        map: {
+          // click: [f1, f2],
+        },
+        on: (name, fn) => {
+          eventHub.map[name] = eventHub.map[name] || []; //防止eventHub.map[name]无值
+          eventHub.map[name].push(fn);
+          return undefined;
+        },
+        off: (name, fn) => {
+          if (!eventHub.map[name]) {
+            return;
+          }
+          const index = eventHub.map[name].indexOf(fn);
+          if (index < 0) {
+            return;
+          }
+          eventHub.map[name].splice(index, 1); //从index中删除一个
+        },
+        emit: (name, data) => {
+          const q = eventHub.map[name];
+          if (!q) {
+            return;
+          }
+          q.map((f) => f.call(undefined, data));
+          return undefined;
+        },
+      };
+
+      eventHub.on("click", console.log);
+      eventHub.on("click", console.error);
+
+      setTimeout(() => {
+        eventHub.emit("click", "flank");
+      }, 3000);
+    </script>
+  </body>
+</html>

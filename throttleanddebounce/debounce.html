@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const f = () => {
+        console.log("回城成功");
+      };
+
+      function x() {}
+
+      const debounce = (f, time) => {
+        let timer = null;
+        return (...args) => {
+          if (timer) {
+            //再次调用x
+            clearTimeout(timer);
+          }
+          timer = setTimeout(() => {
+            f.call(undefined, ...args);
+            timer = null;
+          }, time);
+        };
+      };
+
+      const tp = debounce(f, 3000);
+    </script>
+  </body>
+</html>

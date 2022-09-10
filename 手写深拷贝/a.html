@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   const b = JSON.parse(JSON.stringify(a));
+
+      //缺点：1.不支持Data、正则、undefined、函数等数据类型2.不支持引用(，即环状结构）（对象里还有其他对象)
+
+      const deepClone = (a, cache) => {
+        if (!cache) {
+          cache = new Map(); //如果没有缓存就制造
+        }
+
+        //不考虑iframe
+        if (a instanceof Object) {
+          if (cache.get(a)) {
+            return cache.get(a);
+          }
+          let result = undefined;
+          //object
+          if (a instanceof Function) {
+            //不能100%拷贝
+            if (a.prototype) {
+              result = function () {
+                return a.apply(this, arguments);
+              };
+            } else {
+              //箭头函数
+
+              result = (...args) => {
+                return a.call(undefined, ...args);
+              };
+            }
+          } else if (a instanceof Array) {
+            result = [];
+          } else if (a instanceof Date) {
+            result = new Date(a - 0); //a是一个时间戳
+          } else if (a instanceof RegExp) {
+            result = new RegExp(a); //或者是RegExp(a.source,a.flags)source文本
+          } else {
+            result = {};
+          }
+          cache.set(a, result);
+          for (let key in a) {
+            if (a.hasOwnProperty(key)) {
+              //不拷贝原型上的属性
+              result[key] = deepClone(a[key], cache);
+            }
+          }
+          return result;
+        } else {
+          //string null undefined number bigint bool symbol
+          return a;
+        }
+      };
+    </script>
+  </body>
+</html>
