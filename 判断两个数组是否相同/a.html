@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      let a = ["a", "b", "c"];
+      let b = ["a", "c", "b"];
+      // let r=a==b
+      // console.log(r)//此时结果为false
+      //数组自带的every()来实现
+      // let r =a.length==b.length&&a.every((item,index)=>item==b[index])//此方法当ab数组里的顺序调换一下时结果便等于false
+      // console.log(r)
+      //JSON.转化成字符串
+      let r = JSON.stringify(a.sort()) == JSON.stringify(b.sort()); //sort函数进行编码排序，sort函数还可以使得数组从大到小排列
+      console.log(r);
+    </script>
+  </body>
+</html>
